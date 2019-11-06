@@ -6,8 +6,7 @@ import java.io.IOException;
 
 public class Client extends JFrame implements ConnectionListener, ActionListener {
 
-
-    private final String IP_ADDRESS = "0.0.0.0";
+    private String IP_ADDRESS = "0.0.0.0";
 
     private final int PORT = 8080;
 
@@ -24,19 +23,22 @@ public class Client extends JFrame implements ConnectionListener, ActionListener
     private JTextArea log = new JTextArea();
     private JTextField msgField = new JTextField("");
     private JTextField nickField = new JTextField("anon");
-
+    private JScrollPane scrollPane = new JScrollPane(log);
     private Client() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
         setResizable(false);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        add(scrollPane,BorderLayout.CENTER);
+
+        log.setVisible(true);
 
         log.setEditable(false);
         log.setLineWrap(true);
 
         msgField.addActionListener(this);
-        add(log, BorderLayout.CENTER);
         add(msgField, BorderLayout.SOUTH);
         add(nickField, BorderLayout.NORTH);
 
